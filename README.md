@@ -131,3 +131,34 @@ jobs:
           name: coverage
           path: coverage
 ```
+
+### 샘플 6 (download artifacts)
+jobs 는 각각 다른 인스턴스(컨테이너) 에서 실행되기 때문에 공유하지 못한다.
+따라서, upload, download artifacts 를 사용하여 가져와 사용할 수 있다.
+* `needs` 를 사용하여 job 의존성
+```yml
+name: workflow name
+on: push
+jobs:
+  up:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, Github Actions" > hello.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: hello
+          path: hello.txt
+      - run: ls -al
+  down:
+    runs-on: ubuntu-latest
+    needs: up                    # job 에 의존성  (up 실행 후 실행 (순서))
+    steps:
+      - run: ls -al              # hello.txt 파일 없음  
+      - run: cat hello.txt       # 에러 발생 (파일 없음)
+        continue-on-error: true
+      - uses: actions/download-artifact@v3    # 위에 업로드에 파일을 다운로드 하는 액션
+        with:
+          name: hello
+      - run: ls -al              # hello.txt 파일 있음.
+      - run: cat hello.txt       # 파일이 정상적으로 읽음.
+```
