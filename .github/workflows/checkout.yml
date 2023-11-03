@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: ls -al
-      - uses: actions/checkout@v3
-      	with:
+  	uses: actions/checkout@v3
+  	with:	
 	  path: react-source
       - run: ls -al react-source
       - run: cat react-source/.github/workflows/checkout.yml
