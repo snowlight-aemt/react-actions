@@ -5,7 +5,7 @@
 name: workflow name
 on: github event
 jobs:
-  echo: # jobs name
+  echo: # jobs 식별자
     runs-on: ubuntu-latest # CI OS 환경
     steps:
       - run: echo 'Hello, Github Actions~!' # shell command
