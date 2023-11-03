@@ -7,7 +7,7 @@ on: github event
 jobs:
   echo: # jobs 식별자
     runs-on: ubuntu-latest # CI OS 환경
-    steps:
+    steps:                 # 작업 실행 단계
       - run: echo 'Hello, Github Actions~!' # shell command
 ```
 
