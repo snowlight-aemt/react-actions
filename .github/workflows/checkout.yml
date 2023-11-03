@@ -37,5 +37,10 @@ jobs:
       - id: random
         run: if [[ $(($RANDOM % 2)) == 0 ]]; then exit 0; else exit 1; fi
       - if: ${{ always() }}                    # Github 의 표현식 `${{ always() }}`
-        run: echo ${{ steps.random.outcome }}  # 위에 단계의 실패와 상관없이 무조건 실행됨
+        run: echo ${{ steps.random.outcome }}  # 위에 단계의 실패와 상관없이 무조건 실행
       - run: echo 'Next Next Run'              # 위에 단계가 실패(exit 1) 인 경우 실행되지 않는다. (continue-on-error 차이가 있음)
+  backup:
+    runs-on: ubuntu-latest
+      - run: exit 1
+      - if: ${{ failure() }}      # Github 의 표현식 `${{ failure() }}`
+        run: echo backup          # 위에 단계가 실패하는 경우만 실행
