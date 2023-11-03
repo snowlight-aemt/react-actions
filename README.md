@@ -47,6 +47,7 @@ jobs:
 ### 샘플 4 (env 환경 변수 )
 * 환경 변수 사용
 * if 문법
+* continue-on-error: true
 ```yml
 name: workflow name
 on: push
@@ -74,4 +75,12 @@ jobs:
         run: echo 'zero'
       - if: steps.num.outputs.num == 1
         run: echo 'one'
+  ignore:
+    runs-on: ubuntu-latest
+    steps:
+      - id: fail
+        continue-on-error: true
+        run: exit 1
+      - run: echo '[Error] 에러 발생'
+
 ```
