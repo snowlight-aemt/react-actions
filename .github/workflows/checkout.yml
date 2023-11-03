@@ -28,5 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: fail
+        continue-on-error: true
         run: exit 1
       - run: echo '[Error] 에러 발생'
