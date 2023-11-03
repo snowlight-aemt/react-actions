@@ -1,11 +1,7 @@
 name: Workflow
 on: push
 jobs:
-  checkout:
+  echo:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: actions/checkout
-          ref: v3
-      - run: ls -al
+      - run: echo 'Hello, Github Actions!! 🔥'
