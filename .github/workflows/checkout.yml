@@ -42,6 +42,9 @@ jobs:
   backup:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 0
+      - run: exit 1               # 강제 에러
       - if: ${{ failure() }}      # Github 의 표현식 `${{ failure() }}`
         run: echo backup          # 위에 단계가 실패하는 경우만 실행
+      - run: exit 0
+      - if: ${{ failure() }}
+        run: echo backup          # 실행되지 않음.
