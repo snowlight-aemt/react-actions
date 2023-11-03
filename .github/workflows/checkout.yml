@@ -1,23 +1,21 @@
 name: workflow name
 on: push
 jobs:
-  build:
+  up:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: yarn install --immutable --immutable-cache --check-cache
-      - run: yarn build
+      - run: echo "Hello, Github Actions" > hello.txt
       - uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: build
-  test:
+          name: hello
+          path: hello.txt
+  down:
     runs-on: ubuntu-latest
+    needs: up
     steps:
-      - uses: actions/checkout@v3
-      - run: yarn install --immutable --immutable-cache --check-cache
-      - run: yarn test --coverage
-      - uses: actions/upload-artifact@v3
+      - run: cat hello.txt
+        continue-on-error: true
+      - uses: actions/download-artifact@v3
         with:
-          name: coverage
-          path: coverage
+          name: hello
+        run: cat hello.txt
