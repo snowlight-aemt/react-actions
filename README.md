@@ -47,7 +47,8 @@ jobs:
 ### 샘플 4 (env 환경 변수 )
 * 환경 변수 사용
 * if 문법
-* continue-on-error: true
+* 실제를 무시하고 다음 명령어를 실행한다.
+  * continue-on-error: true
 ```yml
 name: workflow name
 on: push
