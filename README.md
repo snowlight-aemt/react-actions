@@ -104,3 +104,30 @@ jobs:
       - if: ${{ failure() }}      # Github 의 표현식 `${{ failure() }}`
         run: echo backup          # 위에 단계가 실패하는 경우만 실행
 ```
+
+### 샘플 5 (upload artifacts)
+```yml
+name: workflow name
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: yarn install --immutable --immutable-cache --check-cache
+      - run: yarn build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: yarn install --immutable --immutable-cache --check-cache
+      - run: yarn test --coverage
+      - uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverage
+```
