@@ -22,5 +22,5 @@ jobs:
         run: echo "num=$(($RANDOM % 2))" >> $GITHUB_OUTPUT
       - if: steps.num.outputs.num == 0
         run: echo 'zero'
-      - if: steps.num.output.num == 1
+      - if: steps.num.outputs.num == 1
         run: echo 'one'
