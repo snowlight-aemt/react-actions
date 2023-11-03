@@ -41,6 +41,7 @@ jobs:
       - run: echo 'Next Next Run'              # 위에 단계가 실패(exit 1) 인 경우 실행되지 않는다. (continue-on-error 차이가 있음)
   backup:
     runs-on: ubuntu-latest
+    steps:
       - run: exit 1
       - if: ${{ failure() }}      # Github 의 표현식 `${{ failure() }}`
         run: echo backup          # 위에 단계가 실패하는 경우만 실행
