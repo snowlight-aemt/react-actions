@@ -24,3 +24,9 @@ jobs:
         run: echo 'zero'
       - if: steps.num.outputs.num == 1
         run: echo 'one'
+  ignore:
+    runs-on: ubuntu-latest
+    steps:
+      - id: fail
+        run: exit 1
+      - run: echo '[Error] 에러 발생'
