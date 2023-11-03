@@ -20,4 +20,5 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: hello
+      - run: ls -al
       - run: cat hello.txt
