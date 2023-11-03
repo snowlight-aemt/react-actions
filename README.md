@@ -43,3 +43,17 @@ jobs:
       - run: ls -al react-source
       - run: cat react-source/.github/workflows/checkout.yml
 ```
+
+### 샘플 4 (env 환경 변수 )
+```yml
+name: workflow name
+on: push
+jobs:
+  foobar:
+    runs-on: ubuntu-latest
+    steps:
+      - id: set-foo  # 1 단계 의 식별자 
+        run: echo "foo=bar" >> $GITHUB_OUTPUT       # name=value
+      - run: echo ${{ steps.set-foo.outputs.foo }}  # steps.<step_id>.outputs.foo | step_id : steps 의 단계 식별자
+
+```
