@@ -45,6 +45,8 @@ jobs:
 ```
 
 ### 샘플 4 (env 환경 변수 )
+* 환경 변수 사용
+* if 문법
 ```yml
 name: workflow name
 on: push
@@ -63,5 +65,13 @@ jobs:
       - id: num2  # 1 단계 의 식별자 
         run: echo "num=$(($RANDOM % 10 + 1))" >> $GITHUB_OUTPUT
       - run: echo $(( ${{ steps.num1.outputs.num }} + ${{ steps.num1.outputs.num }} ))
-
+  zeroone:
+    runs-on: ubuntu-latest
+    steps:
+      - id: num
+        run: echo "num=$(($RANDOM % 2))" >> $GITHUB_OUTPUT
+      - if: steps.num.outputs.num == 0
+        run: echo 'zero'
+      - if: steps.num.outputs.num == 1
+        run: echo 'one'
 ```
