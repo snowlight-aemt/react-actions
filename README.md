@@ -44,7 +44,7 @@ jobs:
       - run: cat react-source/.github/workflows/checkout.yml
 ```
 
-### 샘플 4 (env 환경 변수 )
+### 샘플 4 (기본 문법)
 * 환경 변수 사용
 * if 문법
 * 실제를 무시하고 다음 명령어를 실행한다.
