@@ -1,7 +1,13 @@
-name: Workflow
-on: push
+name: workflow name
+on: push # github event
 jobs:
-  echo:
+  echo: # jobs 식별자
+    runs-on: ubuntu-latest # CI OS 환경
+    steps:                 # 작업 실행 단계
+      - run: echo 'Hello, Github Actions~!' # shell command
+  pwd:
+    name: PWD
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'Hello, Github Actions!! 🔥'
+      - name: Print Working Directory
+        run: pwd
