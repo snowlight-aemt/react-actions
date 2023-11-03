@@ -49,6 +49,12 @@ jobs:
 * if 문법
 * 실제를 무시하고 다음 명령어를 실행한다.
   * continue-on-error: true
+* 성공, 실패와 상관없이 실행
+  * if: ${{ always() }}
+  * 알람을 받을 때 사용할 수 있다.
+* 실패하는 경우에만 실행
+  * if: ${{ failure() }}
+  * 실패 상항을 대비할 수 있다.
 ```yml
 name: workflow name
 on: push
@@ -83,5 +89,18 @@ jobs:
         continue-on-error: true
         run: exit 1
       - run: echo '[Error] 에러 발생'
-
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - id: random
+        run: if [[ $(($RANDOM % 2)) == 0 ]]; then exit 0; else exit 1; fi
+      - if: ${{ always() }}                    # Github 의 표현식 `${{ always() }}`
+        run: echo ${{ steps.random.outcome }}  # 위에 단계의 실패와 상관없이 무조건 실행
+      - run: echo 'Next Next Run'              # 위에 단계가 실패(exit 1) 인 경우 실행되지 않는다. (continue-on-error 차이가 있음)
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
+      - if: ${{ failure() }}      # Github 의 표현식 `${{ failure() }}`
+        run: echo backup          # 위에 단계가 실패하는 경우만 실행
 ```
