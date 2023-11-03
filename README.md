@@ -3,7 +3,7 @@
 ### 샘플 1
 ```yml
 name: workflow name
-on: github event
+on: push # github event
 jobs:
   echo: # jobs 식별자
     runs-on: ubuntu-latest # CI OS 환경
@@ -11,7 +11,24 @@ jobs:
       - run: echo 'Hello, Github Actions~!' # shell command
 ```
 
-### 샘플 2 (checkout@v3)
+### 샘플 2
+```yml
+name: workflow name
+on: push # github event
+jobs:
+  echo: # jobs 식별자
+    runs-on: ubuntu-latest # CI OS 환경
+    steps:                 # 작업 실행 단계
+      - run: echo 'Hello, Github Actions~!' # shell command
+  pwd:
+    name: PWD
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Working Directory
+        run: pwd
+```
+
+### 샘플 3 (checkout@v3)
 ```yml
 name: Workflow
 on: push
