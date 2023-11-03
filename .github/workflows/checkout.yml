@@ -6,7 +6,7 @@ jobs:
     steps:
       - run: ls -al
       - uses: actions/checkout@v3
-				with:
-					path: react-source
+	with:
+ 	  path: react-source
       - run: ls -al react-source
-      - run: cat /react-source/.github/workflows/checkout.yml
+      - run: cat react-source/.github/workflows/checkout.yml
