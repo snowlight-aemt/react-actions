@@ -1,24 +1,19 @@
 name: workflow name
 on: push
 jobs:
-  up:
-    runs-on: ubuntu-latest
+  depoly:
+    runs-on: [self-hosted, label-go]
     steps:
-      - run: echo "Hello, Github Actions" > hello.txt
-      - uses: actions/upload-artifact@v3
+      - name: Docker Login
+        uses: docker/login-action@v3.0.0
         with:
-          name: hello
-          path: hello.txt
-      - run: ls -al
-  down:
-    runs-on: ubuntu-latest
-    needs: up
-    steps:
-      - run: ls -al
-      - run: cat hello.txt
-        continue-on-error: true
-      - uses: actions/download-artifact@v3
-        with:
-          name: hello
-      - run: ls -al
-      - run: cat hello.txt
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHF_TOKEN }}
+      # - name: Build and push
+      #   id: docker_build
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     builder: ${{ steps.buildx.outputs.name }}
+      #     push: true
+      #     tags: ${{ env.DOCKER_IMAGE }}:latest
