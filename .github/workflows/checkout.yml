@@ -2,7 +2,7 @@ name: workflow name
 on: push
 jobs:
   depoly:
-    runs-on: [self-hosted, label-go]
+    runs-on: ubuntu:latest
     steps:
       - name: Docker Login
         uses: docker/login-action@v3.0.0
