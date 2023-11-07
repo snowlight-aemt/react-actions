@@ -2,7 +2,7 @@ name: workflow name
 on: push
 jobs:
   depoly:
-    runs-on: ubnutu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: docker login
         uses: docker/login-action@v3.0.0
