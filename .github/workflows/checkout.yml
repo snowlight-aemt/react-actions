@@ -7,7 +7,7 @@ jobs:
       - name: Docker Login
         uses: docker/login-action@v3.0.0
         with:
-          registry: ghcr.io
+          registry: hub.docker.com/repositories/mmsnow
           username: ${{ github.actor }}
           password: ${{ secrets.GHF_TOKEN }}
       # - name: Build and push
