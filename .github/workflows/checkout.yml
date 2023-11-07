@@ -2,9 +2,9 @@ name: workflow name
 on: push
 jobs:
   depoly:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, label-go]
     steps:
-      - name: [self-hosted, label-go]
+      - name: docker login
         uses: docker/login-action@v3.0.0
         with:
           registry: ghcr.io
