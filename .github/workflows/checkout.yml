@@ -1,7 +1,7 @@
 name: workflow name
 on: push
 jobs:
-  depoly:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: docker login
@@ -17,6 +17,20 @@ jobs:
           push: true
           tags: mmsnow/test-actions
           labels: latest
+  # depoly:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.REMOTE_IP }}
+  #         username: ${{ secrets.REMOTE_SSH_ID }}
+  #         key: ${{ secrets.REMOTE_SSH_KEY }}
+  #         port: ${{ secrets.REMOTE_SSH_PORT }}
+  #         script: |
+  #           whoami
+  #           git pull origin master
+          
           
       # - name: Build and push
       #   id: docker_build
