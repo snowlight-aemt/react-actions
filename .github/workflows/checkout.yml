@@ -15,7 +15,7 @@ jobs:
           contect: .
           file: ./Dockerfile
           push: true
-          tags: tlqckd0/react
+          tags: mmsnow/test-actions
           labels: latest
           
       # - name: Build and push
